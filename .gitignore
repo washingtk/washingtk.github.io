@@ -1,0 +1,4 @@
+.env
+.python-version
+test.py
+notebooks/text.ipynb

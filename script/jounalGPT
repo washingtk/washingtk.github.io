@@ -1,0 +1,62 @@
+import os, re
+import requests
+from bs4 import BeautifulSoup
+import feedparser
+import openai
+from dotenv import load_dotenv
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv('API')
+
+def askGPT(payload):
+    openai.api_key = OPENAI_API_KEY
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content":  f"{payload}"},
+        ]
+    )
+    return response['choices'][0]['message']['content']
+
+def readRSS():
+    #TODO: it has to provide journal options e.g. readRSS(journal='coindesk')
+
+    coindesk_rss = 'https://www.coindesk.com/arc/outboundfeeds/rss/'
+    parsed = feedparser.parse(coindesk_rss)
+    # for entry in parsed.entries:
+    #     res = requests.get(entry.link)
+    #     soup = BeautifulSoup(res.content, 'html.parser')
+        
+    #     title = soup.find('title').text
+    #     p_tagged = soup.find_all('p', class_=None)
+    #     content = ""
+    #     for tag in p_tagged:
+    #         content = content + tag.text
+    res = requests.get(parsed.entries[0].link)
+    soup = BeautifulSoup(res.content, 'html.parser')
+    
+    title = soup.find('title').text
+    p_tagged = soup.find_all('p', class_=None)
+    content = ""
+    for tag in p_tagged:
+        content = content + tag.text
+    
+    return title, content
+
+def makeSpell(title, content):
+    with open('spell.txt', 'r') as f:
+        spell = f.read()
+    pattern1 = "the article title"
+    pattern2 = "the content"
+    spell = re.sub(pattern1, title, spell)
+    spell = re.sub(pattern2, content, spell)
+
+    return spell
+
+if __name__ == "__main__":
+    title, content = readRSS()
+    payload = makeSpell(title, content)
+    print(f"the original title:{title} \n the original content:{content}")
+    res = askGPT(payload)
+    print(f"the responce from chatGPT:\n{res}")

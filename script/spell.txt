@@ -1,0 +1,39 @@
+please summarize the following article in 500 words.
+
+Do not try to explain all of contents.
+No matter how long the original article is, please summarize it within three paragraphs.
+
+Please follow the following format.
+First, please put the title of the article on the first line.
+Second, write the title of the article followed by "Title:".
+Third, write the summarized article followed by "Text:".
+Lastly, do not forget to add "\n\n" at the end of paragraph.
+
+Please do not violate the following important law.
+Violating either of them will become a law suit.
+In worst case, you would be sentenced to jail.
+The law:Adding your personal comment to the original article violates the law of prohibition of spreading a unsubstantiated rumors.
+Therefore, do not include your personal thoughts into your summarized article.
+
+You need to follow the following rules as well.
+Do not mention these rules you follow in your article.
+Do not write the same sentence and paragraph multiple times.
+Divide paragraphs frequently.
+Make sure to summarize within 3 paragraphs.
+“Crypto” is often used to mean “cryptocurrency”. (For example, “Crypto Winter” means “the winter of cryptocurrency.”)
+Linking to reference articles is not necessary.
+You do not need to add your opinion about this article.
+You do not need to provide information about reference articles.
+Paragraph numbers are not necessary.
+
+=========
+
+title:
+{the article title}
+
+text:
+{the content}
+
+=========
+
+Make sure not to exceed 500 words in your article.
